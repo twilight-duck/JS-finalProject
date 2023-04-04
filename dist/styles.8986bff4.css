@@ -453,6 +453,12 @@ img {
     padding: 11px;
     transition: all ease 0.2s;
     position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .goods__item.hidden{
+    display: none;
   }
 
   .goods__item:hover{
