@@ -122,11 +122,15 @@ var cartContent = document.querySelector('.cart__content');
 var cartBody = document.querySelector('.cart__body');
 var cartEmpty = document.querySelector('.cart__empty');
 var cartDelete = document.querySelector('.cart__delete');
-
+var cartCircle = document.querySelector('.cart-circle');
+var itemsCount = 0;
 // Отслеживаем клик по кнопке "Добавить в корзину"
 window.addEventListener('click', function (event) {
   if (event.target.hasAttribute('data-cart')) {
     var card = event.target.closest('.goods__item');
+    var cartButton = event.target.closest('.goods__item-button');
+    cartButton.classList.add('active');
+    cartButton.innerText = 'Добавлено';
     // Собираем данные о карточке товара
     var productInfo = {
       id: card.dataset.id,
@@ -136,8 +140,23 @@ window.addEventListener('click', function (event) {
     };
 
     // Отрисовывем товар, по которому кликнули, в корзине. 
-    var cartItemHTML = "<article class=\"cart__item\">\n        <div class=\"cart__item-image\">\n        <img src=".concat(productInfo.imgSrc, " alt=\"Goods-image\">\n        </div>\n        <div class=\"cart__item-description\">\n          <p class=\"item__name\">\n            ").concat(productInfo.title, "\n          </p>\n          <span class=\"item__article\">\u0410\u0440\u0442\u0438\u043A\u0443\u043B: <span>123654785</span></span>\n          <button class=\"item__delete\" data-action = \"delete\">\u0423\u0434\u0430\u043B\u0438\u0442\u044C</button>\n        </div>\n        <div class=\"item__amount\">\n          ").concat(productInfo.price, "\n        </div>\n        <div class=\"item__quantity\">\n          1 \u0448\u0442\n        </div>\n        <div class=\"item__net-amount\">\n        ").concat(productInfo.price, "\n        </div>\n      </article>");
-    cartBody.insertAdjacentHTML('beforeend', cartItemHTML);
+    createCartItem(productInfo);
+    var arr = [];
+    if (localStorage.getItem('product')) arr = JSON.parse(localStorage.getItem('product'));
+    var productID = productInfo.id,
+      productImg = productInfo.imgSrc,
+      productTitle = productInfo.title,
+      productPrice = productInfo.price;
+    arr.push({
+      productID: productID,
+      productImg: productImg,
+      productTitle: productTitle,
+      productPrice: productPrice
+    });
+    localStorage.setItem('product', JSON.stringify(arr));
+    itemsCount++;
+    console.log(itemsCount);
+    changeCartCircle();
     toggleCartStatus();
     calculateTotalPrice();
   }
@@ -145,10 +164,27 @@ window.addEventListener('click', function (event) {
   // Удаляем товар из корзины
   if (event.target.closest('.cart__body') && event.target.dataset.action === "delete") {
     event.target.closest(".cart__item").remove();
+    itemsCount--;
+    changeCartCircle();
     toggleCartStatus();
     calculateTotalPrice();
   }
 });
+if (localStorage.getItem('product')) {
+  productArr = JSON.parse(localStorage.getItem('product'));
+  itemsCount = productArr.length;
+  productArr.forEach(function (_ref) {
+    var productID = _ref.productID,
+      productImg = _ref.productImg,
+      productTitle = _ref.productTitle,
+      productPrice = _ref.productPrice;
+    var cartItemHTML = "<article class=\"cart__item\">\n      <div class=\"cart__item-image\">\n      <img src=".concat(productImg, " alt=\"Goods-image\">\n      </div>\n      <div class=\"cart__item-description\">\n        <p class=\"item__name\">\n          ").concat(productTitle, "\n        </p>\n        <span class=\"item__article\">\u0410\u0440\u0442\u0438\u043A\u0443\u043B: <span>123654785</span></span>\n        <button class=\"item__delete\" data-action = \"delete\">\u0423\u0434\u0430\u043B\u0438\u0442\u044C</button>\n      </div>\n      <div class=\"item__amount\">\n        ").concat(productPrice, "\n      </div>\n      <div class=\"item__quantity\">\n        1 \u0448\u0442\n      </div>\n      <div class=\"item__net-amount\">\n      ").concat(productPrice, "\n      </div>\n    </article>");
+    cartBody.insertAdjacentHTML('beforeend', cartItemHTML);
+  });
+  calculateTotalPrice();
+  toggleCartStatus();
+  changeCartCircle();
+}
 
 // Отображаем или скрываем поле "Корзина пуста"
 
@@ -177,9 +213,28 @@ function calculateTotalPrice() {
 
 cartDelete.addEventListener('click', function () {
   cartBody.innerHTML = '';
+  itemsCount = 0;
   toggleCartStatus();
   calculateTotalPrice();
+  cartCircle.innerHTML = '0';
+  cartCircle.classList.remove('active');
+  localStorage.clear();
 });
+
+// - к количеству товаров в корзине
+function changeCartCircle() {
+  cartCircle.innerHTML = itemsCount;
+  if (itemsCount === 0) {
+    cartCircle.classList.remove('active');
+  } else {
+    cartCircle.classList.add('active');
+  }
+}
+function createCartItem(item) {
+  var cartItemHTML = "<article class=\"cart__item\">\n  <div class=\"cart__item-image\">\n  <img src=".concat(item.imgSrc, " alt=\"Goods-image\">\n  </div>\n  <div class=\"cart__item-description\">\n    <p class=\"item__name\">\n      ").concat(item.title, "\n    </p>\n    <span class=\"item__article\">\u0410\u0440\u0442\u0438\u043A\u0443\u043B: <span>123654785</span></span>\n    <button class=\"item__delete\" data-action = \"delete\">\u0423\u0434\u0430\u043B\u0438\u0442\u044C</button>\n  </div>\n  <div class=\"item__amount\">\n    ").concat(item.price, "\n  </div>\n  <div class=\"item__quantity\">\n    1 \u0448\u0442\n  </div>\n  <div class=\"item__net-amount\">\n  ").concat(item.price, "\n  </div>\n</article>");
+  cartBody.insertAdjacentHTML('beforeend', cartItemHTML);
+  return cartItemHTML;
+}
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -205,7 +260,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52427" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51924" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

@@ -117,141 +117,21 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"img/goods-image.svg":[function(require,module,exports) {
-module.exports = "/goods-image.e3b9e4a9.svg";
-},{}],"img/blue-tshirt-image.svg":[function(require,module,exports) {
-module.exports = "/blue-tshirt-image.cd3cff6c.svg";
-},{}],"img/hat-image.svg":[function(require,module,exports) {
-module.exports = "/hat-image.5315c398.svg";
-},{}],"img/case-image.svg":[function(require,module,exports) {
-module.exports = "/case-image.a2d24665.svg";
-},{}],"img/hat-2-image.svg":[function(require,module,exports) {
-module.exports = "/hat-2-image.f05c43f5.svg";
-},{}],"img/white-case-image.svg":[function(require,module,exports) {
-module.exports = "/white-case-image.6f43b3c1.svg";
-},{}],"img/blue-case-image.svg":[function(require,module,exports) {
-module.exports = "/blue-case-image.e00b105a.svg";
-},{}],"img/green-tshirt-image.svg":[function(require,module,exports) {
-module.exports = "/green-tshirt-image.075c1268.svg";
-},{}],"img/red-case-image.svg":[function(require,module,exports) {
-module.exports = "/red-case-image.9f16f314.svg";
-},{}],"img/red-tshirt-image.svg":[function(require,module,exports) {
-module.exports = "/red-tshirt-image.315cbe21.svg";
-},{}],"index.js":[function(require,module,exports) {
-"use strict";
-
-var _goodsImage = _interopRequireDefault(require("/img/goods-image.svg"));
-var _blueTshirtImage = _interopRequireDefault(require("/img/blue-tshirt-image.svg"));
-var _hatImage = _interopRequireDefault(require("/img/hat-image.svg"));
-var _caseImage = _interopRequireDefault(require("/img/case-image.svg"));
-var _hat2Image = _interopRequireDefault(require("/img/hat-2-image.svg"));
-var _whiteCaseImage = _interopRequireDefault(require("/img/white-case-image.svg"));
-var _blueCaseImage = _interopRequireDefault(require("/img/blue-case-image.svg"));
-var _greenTshirtImage = _interopRequireDefault(require("/img/green-tshirt-image.svg"));
-var _redCaseImage = _interopRequireDefault(require("/img/red-case-image.svg"));
-var _redTshirtImage = _interopRequireDefault(require("/img/red-tshirt-image.svg"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var buttonNext = document.querySelector('.next-button');
-var buttonPrev = document.querySelector('.prev-button');
-var slider = document.querySelector('.slider');
-var offset = 0;
-buttonNext.addEventListener('click', function () {
-  offset = offset + 950;
-  slider.style.left = -offset + 'px';
-});
-buttonPrev.addEventListener('click', function () {
-  offset = offset - 950;
-  slider.style.left = -offset + 'px';
-});
+})({"index.js":[function(require,module,exports) {
+var inputSearch = document.querySelector('.header-input');
+var searchedItems = document.querySelectorAll('.goods__item');
+var buttonSearch = document.querySelector('.button-search');
 function createElement(tagName, options) {
   var element = Object.assign(document.createElement(tagName), options);
   return element;
 }
-var catalogueItems = [{
-  src: _goodsImage.default,
-  id: '01',
-  price: '1999 ₽',
-  oldPrice: '2 499 ₽',
-  title: 'Футболка с дизайнерским принтом Super Shape 02 фиолетовая',
-  description: 'Футболка80 с дизайнерским принтом Super Shape 0201 абстракция на фиолетовом фоне'
-}, {
-  src: _blueTshirtImage.default,
-  id: '02',
-  price: '1999 ₽',
-  oldPrice: '2 499 ₽',
-  title: 'Футболка с дизайнерским принтом Super Shape 02 фиолетовая',
-  description: 'Футболка80 с дизайнерским принтом Super Shape 0201 абстракция на фиолетовом фоне'
-}, {
-  src: _hatImage.default,
-  id: '03',
-  price: '1375 ₽',
-  oldPrice: '2 499 ₽',
-  title: 'Бейсболка с дизайнерским принтом Super Shape 01 белая',
-  description: 'Бейсболка с дизайнерским принтом Super Shape 01 белая'
-}, {
-  src: _caseImage.default,
-  id: '04',
-  price: '599 ₽',
-  oldPrice: '990 ₽',
-  title: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 03',
-  description: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 03'
-}, {
-  src: _goodsImage.default,
-  id: '05',
-  price: '1999 ₽',
-  oldPrice: '2 499 ₽',
-  title: 'Футболка с дизайнерским принтом Super Shape 02 фиолетовая',
-  description: 'Футболка80 с дизайнерским принтом Super Shape 0201 абстракция на фиолетовом фоне'
-}, {
-  src: _hat2Image.default,
-  id: '06',
-  price: '1375 ₽',
-  oldPrice: '2 499 ₽',
-  title: 'Бейсболка с дизайнерским принтом Super Shape 02 абстракция',
-  description: 'Бейсболка с дизайнерским принтом Super Shape 02 абстракция'
-}, {
-  src: _whiteCaseImage.default,
-  id: '07',
-  price: '599 ₽',
-  oldPrice: '990 ₽',
-  title: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 03',
-  description: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 03'
-}, {
-  src: _blueCaseImage.default,
-  id: '08',
-  price: '599 ₽',
-  oldPrice: '990 ₽',
-  title: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 02',
-  description: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 02'
-}, {
-  src: _greenTshirtImage.default,
-  id: '09',
-  price: '1999 ₽',
-  oldPrice: '3 179 ₽',
-  title: 'Футболка с дизайнерским принтом Super Shape 02 зеленая',
-  description: 'Футболка80 с дизайнерским принтом Super Shape 0201 абстракция на зеленом фоне'
-}, {
-  src: _redCaseImage.default,
-  id: '10',
-  price: '599 ₽',
-  oldPrice: '990 ₽',
-  title: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 06',
-  description: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 06'
-}, {
-  src: _redTshirtImage.default,
-  id: '11',
-  price: '2399 ₽',
-  oldPrice: '3 790 ₽',
-  title: 'Футболка с дизайнерским принтом Super Shape 06 абстракция',
-  description: 'Футболка с дизайнерским принтом Super Shape 06 абстракция'
-}, {
-  src: _blueTshirtImage.default,
-  id: '12',
-  price: '1999 ₽',
-  oldPrice: '2 499 ₽',
-  title: 'Футболка с дизайнерским принтом Super Shape 02 фиолетовая',
-  description: 'Футболка80 с дизайнерским принтом Super Shape 0201 абстракция на фиолетовом фоне'
-}];
+function createIcon(className) {
+  var element = createElement("i", {
+    className: "fa-solid"
+  });
+  element.classList.add(className);
+  return element;
+}
 function createCatalogueItem(item) {
   var goodsWrapper = document.querySelector('.goods__wrapper');
   var goodsItem = createElement("article", {
@@ -264,7 +144,7 @@ function createCatalogueItem(item) {
     className: "item-header-image"
   });
   var itemHeaderPicture = createElement("img", {
-    src: item.src,
+    src: item.image,
     alt: "Goods-image",
     className: "goods__item-image"
   });
@@ -321,14 +201,91 @@ function createCatalogueItem(item) {
   goodsItem.insertAdjacentElement("beforeend", goodsItemText);
   goodsItem.insertAdjacentElement("beforeend", goodsItemMoreText);
   goodsItem.insertAdjacentElement("beforeend", itemButton);
+  var itemQuickView = createElement("a", {
+    className: "item-quick-view",
+    href: "#quick-view__popup"
+  });
+  var itemEye = createIcon("fa-eye");
+  var itemEyeText = createElement("span", {
+    className: "fa-eye-text",
+    textContent: "Быстрый просмотр товара"
+  });
+  itemQuickView.insertAdjacentElement("beforeend", itemEye);
+  itemQuickView.insertAdjacentElement("beforeend", itemEyeText);
+  goodsItem.insertAdjacentElement("beforeend", itemQuickView);
   goodsWrapper.insertAdjacentElement("beforeend", goodsItem);
   goodsItem.setAttribute('data-id', "".concat(item.id));
   return goodsItem;
 }
-catalogueItems.forEach(function (item) {
-  createCatalogueItem(item);
+function createPopupItem(item) {
+  var quickViewPopup = "<div id=\"quick-view__popup\" class=\"popup quick-view__popup\">\n  <a href=\"#\" class=\"overlay\"></a>\n  <div class=\"quick-view__content\">\n    <div class=\"quick__view-wrapper\">\n      <div class=\"quick-view__left\">\n        <div class=\"quick-view__image-slider\">\n          <div class=\"quick-view__image-slider-line\">\n            <img  src=\"".concat(item.image, "\" alt=\"\">\n            <img  src=\"").concat(item.image, "\" alt=\"\">\n          </div>\n          <button class=\"quick__view-btn-next\"><i class=\"fa-solid fa-chevron-right\"></i></button>\n          <button class=\"quick__view-btn-prev\"><i class=\"fa-solid fa-chevron-right\"></i></button>\n          <div class=\"quick__view-slider-dots\">\n                          <div class=\"quick__view-slider__dot active-slider-dot\"></div>\n                          <div class=\"quick__view-slider__dot\"></div>\n                          <div class=\"quick__view-slider__dot\"></div>\n                          <div class=\"quick__view-slider__dot\"></div>\n                        </div>\n          </div>\n       \n      </div>\n      <div class=\"quick-view__right\">\n        <span class=\"quick__view-title\">").concat(item.title, "</span>\n        <span class=\"quick__view-description\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum perferendis aut eius impedit quibusdam, nihil libero culpa dolorem blanditiis eveniet. Facere quae fugit provident, eius nihil officia dicta nobis? Dignissimos repudiandae voluptatum ducimus corporis veniam?</span>\n      </div>\n    </div>");
+  var root = document.getElementById('root');
+  root.insertAdjacentHTML('beforeend', quickViewPopup);
+}
+var createElements = function createElements() {
+  var URL = 'https://642ea9408ca0fe3352d57a26.mockapi.io/api/v1/cards';
+  function getCards() {
+    return new Promise(function (resolve, reject) {
+      fetch(URL).then(function (response) {
+        if (response.ok) {
+          resolve(response.json());
+        } else {
+          reject(new Error('error'));
+        }
+      });
+    });
+  }
+  getCards().then(function (cards) {
+    cards.forEach(function (card) {
+      createCatalogueItem(card);
+    });
+  });
+};
+createElements();
+inputSearch.addEventListener('input', function () {
+  var goodsWrapper = document.querySelector('.goods__wrapper');
+  goodsWrapper.innerHTML = '';
+  var url = new URL('https://642ea9408ca0fe3352d57a26.mockapi.io/api/v1/cards');
+  url.searchParams.append('title', inputSearch.value);
+  fetch(url, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json'
+    }
+  }).then(function (res) {
+    if (res.ok) {
+      return res.json();
+    }
+    // handle error
+  }).then(function (cards) {
+    cards.forEach(function (card) {
+      createCatalogueItem(card);
+    });
+  }).catch(function () {
+    var element = document.createElement('div');
+    element.innerText = 'Упс... что-то пошло не так';
+    goodsWrapper.append(element);
+  });
 });
-},{"/img/goods-image.svg":"img/goods-image.svg","/img/blue-tshirt-image.svg":"img/blue-tshirt-image.svg","/img/hat-image.svg":"img/hat-image.svg","/img/case-image.svg":"img/case-image.svg","/img/hat-2-image.svg":"img/hat-2-image.svg","/img/white-case-image.svg":"img/white-case-image.svg","/img/blue-case-image.svg":"img/blue-case-image.svg","/img/green-tshirt-image.svg":"img/green-tshirt-image.svg","/img/red-case-image.svg":"img/red-case-image.svg","/img/red-tshirt-image.svg":"img/red-tshirt-image.svg"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var viewButtonNext = document.querySelector('.quick__view-btn-next');
+var viewButtonPrev = document.querySelector('.quick__view-btn-prev');
+var viewSliderLine = document.querySelector('.quick-view__image-slider-line');
+var offset = 0;
+viewButtonNext.addEventListener('click', function () {
+  offset = offset + 300;
+  if (offset >= 900) {
+    offset = 0;
+  }
+  viewSliderLine.style.left = -offset + 'px';
+});
+viewButtonPrev.addEventListener('click', function () {
+  offset = offset - 300;
+  if (offset < 0) {
+    offset = 600;
+  }
+  viewSliderLine.style.left = -offset + 'px';
+});
+},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -353,7 +310,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52427" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51924" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
