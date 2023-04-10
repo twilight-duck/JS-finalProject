@@ -1,144 +1,25 @@
-const buttonNext = document.querySelector('.next-button');
-const buttonPrev = document.querySelector('.prev-button');
-const slider = document.querySelector('.slider');
-
-
-
-let offset = 0;
-
-buttonNext.addEventListener('click', function(){
-    offset = offset + 950;
-    slider.style.left = -offset + 'px';
-})
-
-buttonPrev.addEventListener('click', function(){
-    offset = offset - 950;
-    slider.style.left = -offset + 'px';
-})
-
+const inputSearch = document.querySelector('.header-input');
+let searchedItems = document.querySelectorAll('.goods__item');
+const buttonSearch = document.querySelector('.button-search')
 
 function createElement(tagName, options) {
   const element = Object.assign(document.createElement(tagName), options);
   return element;
 }
 
-import tshirtImage from '/img/goods-image.svg';
-import blueTshirtImage from '/img/blue-tshirt-image.svg';
-import hatImage from '/img/hat-image.svg';
-import caseImage from '/img/case-image.svg';
-import newHatImage from '/img/hat-2-image.svg';
-import whiteCaseImage from '/img/white-case-image.svg';
-import blueCaseImage from '/img/blue-case-image.svg';
-import greenTshirtImage from '/img/green-tshirt-image.svg';
-import redCaseImage from '/img/red-case-image.svg';
-import redTshirtImage from '/img/red-tshirt-image.svg';
+function createIcon(className) {
+  const element = createElement("i", { className: "fa-solid" });
+  element.classList.add(className);
 
-const catalogueItems = [
-  {
-    src: tshirtImage,
-    id: '01',
-    price: '1999 ₽',
-    oldPrice: '2 499 ₽',
-    title: 'Футболка с дизайнерским принтом Super Shape 02 фиолетовая',
-    description: 'Футболка80 с дизайнерским принтом Super Shape 0201 абстракция на фиолетовом фоне', 
-},
-{
-  src: blueTshirtImage,
-  id: '02',
-  price: '1999 ₽',
-  oldPrice: '2 499 ₽',
-  title: 'Футболка с дизайнерским принтом Super Shape 02 фиолетовая',
-  description: 'Футболка80 с дизайнерским принтом Super Shape 0201 абстракция на фиолетовом фоне', 
-},
-{
-  src: hatImage,
-  id: '03',
-  price: '1375 ₽',
-  oldPrice: '2 499 ₽',
-  title: 'Бейсболка с дизайнерским принтом Super Shape 01 белая',
-  description: 'Бейсболка с дизайнерским принтом Super Shape 01 белая', 
-},
-{
-  src: caseImage,
-  id: '04',
-  price: '599 ₽',
-  oldPrice: '990 ₽',
-  title: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 03',
-  description: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 03', 
-},
-{
-  src: tshirtImage,
-  id: '05',
-  price: '1999 ₽',
-  oldPrice: '2 499 ₽',
-  title: 'Футболка с дизайнерским принтом Super Shape 02 фиолетовая',
-  description: 'Футболка80 с дизайнерским принтом Super Shape 0201 абстракция на фиолетовом фоне', 
-},
-{
-  src: newHatImage,
-  id: '06',
-  price: '1375 ₽',
-  oldPrice: '2 499 ₽',
-  title: 'Бейсболка с дизайнерским принтом Super Shape 02 абстракция',
-  description: 'Бейсболка с дизайнерским принтом Super Shape 02 абстракция', 
-},
-{
-  src: whiteCaseImage,
-  id: '07',
-  price: '599 ₽',
-  oldPrice: '990 ₽',
-  title: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 03',
-  description: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 03', 
-},
-{
-  src: blueCaseImage,
-  id: '08',
-  price: '599 ₽',
-  oldPrice: '990 ₽',
-  title: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 02',
-  description: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 02', 
-},
-{
-  src: greenTshirtImage,
-  id: '09',
-  price: '1999 ₽',
-  oldPrice: '3 179 ₽',
-  title: 'Футболка с дизайнерским принтом Super Shape 02 зеленая',
-  description: 'Футболка80 с дизайнерским принтом Super Shape 0201 абстракция на зеленом фоне', 
-},
-{
-  src: redCaseImage,
-  id: '10',
-  price: '599 ₽',
-  oldPrice: '990 ₽',
-  title: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 06',
-  description: 'Чехол для iphone 12 с дизайнерским принтом Super Shape 06', 
-},
-{
-  src: redTshirtImage,
-  id: '11',
-  price: '2399 ₽',
-  oldPrice: '3 790 ₽',
-  title: 'Футболка с дизайнерским принтом Super Shape 06 абстракция',
-  description: 'Футболка с дизайнерским принтом Super Shape 06 абстракция', 
-},
-{
-  src: blueTshirtImage,
-  id: '12',
-  price: '1999 ₽',
-  oldPrice: '2 499 ₽',
-  title: 'Футболка с дизайнерским принтом Super Shape 02 фиолетовая',
-  description: 'Футболка80 с дизайнерским принтом Super Shape 0201 абстракция на фиолетовом фоне', 
-},
-]
-
+  return element;
+}
 
 function createCatalogueItem(item){
   const goodsWrapper = document.querySelector('.goods__wrapper');
   const goodsItem = createElement("article", {className: "goods__item"});
   const goodsItemHeader = createElement("header", {className: "goods__item-header"});
   const itemHeaderImage = createElement("div", {className: "item-header-image"});
-  const itemHeaderPicture = createElement("img", {src: item.src, alt: "Goods-image",className: "goods__item-image"});
+  const itemHeaderPicture = createElement("img", {src: item.image, alt: "Goods-image",className: "goods__item-image"});
   const itemImageDiscount = createElement("span", {className: "item-image-discount", textContent: "-25%"});
 
   itemHeaderImage.insertAdjacentElement("beforeend", itemHeaderPicture);
@@ -170,21 +51,123 @@ function createCatalogueItem(item){
   goodsItem.insertAdjacentElement("beforeend", goodsItemMoreText);
   goodsItem.insertAdjacentElement("beforeend", itemButton);
 
+
+  const itemQuickView = createElement("a", {className: "item-quick-view", href: "#quick-view__popup"});
+  const itemEye = createIcon("fa-eye");
+  const itemEyeText = createElement("span", {className: "fa-eye-text", textContent: "Быстрый просмотр товара"})
+  itemQuickView.insertAdjacentElement("beforeend", itemEye);
+  itemQuickView.insertAdjacentElement("beforeend", itemEyeText);
+  goodsItem.insertAdjacentElement("beforeend", itemQuickView);
+
+  
   goodsWrapper.insertAdjacentElement("beforeend", goodsItem);
   goodsItem.setAttribute('data-id', `${item.id}`);
   return goodsItem;
   
 }
 
-catalogueItems.forEach(function(item){
- createCatalogueItem(item);
+function createPopupItem(item){
+  const quickViewPopup = `<div id="quick-view__popup" class="popup quick-view__popup">
+  <a href="#" class="overlay"></a>
+  <div class="quick-view__content">
+    <div class="quick__view-wrapper">
+      <div class="quick-view__left">
+        <div class="quick-view__image-slider">
+          <div class="quick-view__image-slider-line">
+            <img  src="${item.image}" alt="">
+            <img  src="${item.image}" alt="">
+          </div>
+          <button class="quick__view-btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+          <button class="quick__view-btn-prev"><i class="fa-solid fa-chevron-right"></i></button>
+          <div class="quick__view-slider-dots">
+                          <div class="quick__view-slider__dot active-slider-dot"></div>
+                          <div class="quick__view-slider__dot"></div>
+                          <div class="quick__view-slider__dot"></div>
+                          <div class="quick__view-slider__dot"></div>
+                        </div>
+          </div>
+       
+      </div>
+      <div class="quick-view__right">
+        <span class="quick__view-title">${item.title}</span>
+        <span class="quick__view-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum perferendis aut eius impedit quibusdam, nihil libero culpa dolorem blanditiis eveniet. Facere quae fugit provident, eius nihil officia dicta nobis? Dignissimos repudiandae voluptatum ducimus corporis veniam?</span>
+      </div>
+    </div>`;
+
+    const root = document.getElementById('root');
+    root.insertAdjacentHTML('beforeend', quickViewPopup);
+
+}
+
+const createElements = () => {
+  const URL = 'https://642ea9408ca0fe3352d57a26.mockapi.io/api/v1/cards';
+  function getCards(){
+    return new Promise((resolve, reject) => {
+      fetch(URL).then((response) =>{
+        if(response.ok){
+          resolve(response.json())
+        } else{
+          reject(new Error('error'));
+        }
+      })
+    })
+  }
+
+  getCards().then((cards) => {
+    cards.forEach((card) => {
+     createCatalogueItem(card);
+    });
+  })
+}
+
+
+createElements();
+
+inputSearch.addEventListener('input', function() {
+    const goodsWrapper = document.querySelector('.goods__wrapper');
+    goodsWrapper.innerHTML = '';
+    const url = new URL('https://642ea9408ca0fe3352d57a26.mockapi.io/api/v1/cards');
+    url.searchParams.append('title', inputSearch.value);
+
+fetch(url, {
+  method: 'GET',
+  headers: {'content-type':'application/json'},
+}).then(res => {
+  if (res.ok) {
+      return res.json();
+  }
+  // handle error
+}).then((cards) => {
+    cards.forEach((card) => {
+      createCatalogueItem(card);
+      })
+}).catch(() => {
+    const element = document.createElement('div');
+    element.innerText = 'Упс... что-то пошло не так';
+    goodsWrapper.append(element);
 })
-  
+});
 
 
+const viewButtonNext = document.querySelector('.quick__view-btn-next');
+const viewButtonPrev = document.querySelector('.quick__view-btn-prev');
+const viewSliderLine = document.querySelector('.quick-view__image-slider-line');
+
+let offset = 0;
 
 
+viewButtonNext.addEventListener('click', function(){
+    offset = offset + 300;
+    if (offset >= 900) {
+        offset = 0;
+    }
+    viewSliderLine.style.left = -offset + 'px';
+});
 
-
-
-
+viewButtonPrev.addEventListener('click', function () {
+    offset = offset - 300;
+    if (offset < 0) {
+        offset = 600;
+    }
+    viewSliderLine.style.left = -offset + 'px';
+});
