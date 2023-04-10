@@ -117,69 +117,26 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"cart.js":[function(require,module,exports) {
-var cartContent = document.querySelector('.cart__content');
-var cartBody = document.querySelector('.cart__body');
-var cartEmpty = document.querySelector('.cart__empty');
-var cartDelete = document.querySelector('.cart__delete');
-
-// Отслеживаем клик по кнопке "Добавить в корзину"
-window.addEventListener('click', function (event) {
-  if (event.target.hasAttribute('data-cart')) {
-    var card = event.target.closest('.goods__item');
-    // Собираем данные о карточке товара
-    var productInfo = {
-      id: card.dataset.id,
-      imgSrc: card.querySelector('.goods__item-image').getAttribute('src'),
-      title: card.querySelector('.goods__item-text').innerText,
-      price: card.querySelector('.goods__item-discount').innerText
-    };
-
-    // Отрисовывем товар, по которому кликнули, в корзине. 
-    var cartItemHTML = "<article class=\"cart__item\">\n        <div class=\"cart__item-image\">\n        <img src=".concat(productInfo.imgSrc, " alt=\"Goods-image\">\n        </div>\n        <div class=\"cart__item-description\">\n          <p class=\"item__name\">\n            ").concat(productInfo.title, "\n          </p>\n          <span class=\"item__article\">\u0410\u0440\u0442\u0438\u043A\u0443\u043B: <span>123654785</span></span>\n          <button class=\"item__delete\" data-action = \"delete\">\u0423\u0434\u0430\u043B\u0438\u0442\u044C</button>\n        </div>\n        <div class=\"item__amount\">\n          ").concat(productInfo.price, "\n        </div>\n        <div class=\"item__quantity\">\n          1 \u0448\u0442\n        </div>\n        <div class=\"item__net-amount\">\n        ").concat(productInfo.price, "\n        </div>\n      </article>");
-    cartBody.insertAdjacentHTML('beforeend', cartItemHTML);
-    toggleCartStatus();
-    calculateTotalPrice();
-  }
-
-  // Удаляем товар из корзины
-  if (event.target.closest('.cart__body') && event.target.dataset.action === "delete") {
-    event.target.closest(".cart__item").remove();
-    toggleCartStatus();
-    calculateTotalPrice();
-  }
-});
-
-// Отображаем или скрываем поле "Корзина пуста"
-
-function toggleCartStatus() {
-  if (cartBody.children.length > 0) {
-    cartEmpty.classList.add('none');
+})({"search.js":[function(require,module,exports) {
+var inputSearch = document.querySelector('.header-input');
+var searchedItems = document.querySelectorAll('.goods__item');
+inputSearch.oninput = function () {
+  var value = this.value.trim().toUpperCase();
+  if (value != '') {
+    // Проверяем наличие карточки с товаром через поиск 
+    searchedItems.forEach(function (item) {
+      if (item.innerHTML.toUpperCase().search(value) == -1) {
+        item.classList.add('hidden');
+      } else {
+        item.classList.remove('hidden');
+      }
+    });
   } else {
-    cartEmpty.classList.remove('none');
+    searchedItems.forEach(function (item) {
+      item.classList.remove('hidden');
+    });
   }
-}
-
-// Подсчет итоговой стоимости товаров
-
-function calculateTotalPrice() {
-  var cartItems = document.querySelectorAll('.cart__item');
-  var totalPrice = 0;
-  cartItems.forEach(function (item) {
-    var priceEl = item.querySelector('.item__amount');
-    totalPrice += parseInt(priceEl.textContent);
-  });
-  var cartTotalAmount = document.querySelector('.cart__amount');
-  cartTotalAmount.innerHTML = totalPrice + ' ₽';
-}
-
-// Удаляем из корзины всё сразу
-
-cartDelete.addEventListener('click', function () {
-  cartBody.innerHTML = '';
-  toggleCartStatus();
-  calculateTotalPrice();
-});
+};
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -349,5 +306,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","cart.js"], null)
-//# sourceMappingURL=/cart.5e0824ae.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","search.js"], null)
+//# sourceMappingURL=/search.475a728d.js.map

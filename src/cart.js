@@ -3,11 +3,13 @@ const cartBody = document.querySelector('.cart__body');
 const cartEmpty = document.querySelector('.cart__empty');
 const cartDelete = document.querySelector('.cart__delete');
 
+
+// Отслеживаем клик по кнопке "Добавить в корзину"
 window.addEventListener('click', (event) => {
 
     if (event.target.hasAttribute('data-cart')){
         const card = event.target.closest('.goods__item');
-        
+// Собираем данные о карточке товара
         const productInfo = {
             id: card.dataset.id,
             imgSrc: card.querySelector('.goods__item-image').getAttribute('src'),
@@ -16,7 +18,7 @@ window.addEventListener('click', (event) => {
         }
         
         
-
+// Отрисовывем товар, по которому кликнули, в корзине. 
         const cartItemHTML = `<article class="cart__item">
         <div class="cart__item-image">
         <img src=${productInfo.imgSrc} alt="Goods-image">
@@ -45,6 +47,7 @@ window.addEventListener('click', (event) => {
       calculateTotalPrice();
     }
 
+// Удаляем товар из корзины
     if(event.target.closest('.cart__body') && event.target.dataset.action === "delete"){
       event.target.closest(".cart__item").remove();
       toggleCartStatus();
@@ -53,6 +56,8 @@ window.addEventListener('click', (event) => {
       
 })
 
+// Отображаем или скрываем поле "Корзина пуста"
+
 function toggleCartStatus() {
   if(cartBody.children.length > 0){
       cartEmpty.classList.add('none')
@@ -60,6 +65,8 @@ function toggleCartStatus() {
       cartEmpty.classList.remove('none')
     }
 }
+
+// Подсчет итоговой стоимости товаров
 
 function calculateTotalPrice(){
   const cartItems = document.querySelectorAll('.cart__item');
@@ -74,6 +81,8 @@ function calculateTotalPrice(){
   cartTotalAmount.innerHTML = totalPrice + ' ₽';
 
 }
+
+// Удаляем из корзины всё сразу
 
 cartDelete.addEventListener('click', () => {
   cartBody.innerHTML = '';
